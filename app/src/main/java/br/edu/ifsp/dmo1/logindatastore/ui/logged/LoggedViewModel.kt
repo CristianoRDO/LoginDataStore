@@ -22,6 +22,21 @@ class LoggedViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    /*
+     * Função de logout alternativa (comentada)
+     *
+     * Esta versão armazena os dados de login dependendo da escolha do usuário:
+     * - Se o usuário optou por salvar o login, os dados (email e senha) são armazenados novamente.
+     * - Se o usuário não optou por salvar o login, as preferências são apagadas.
+     *
+     * Coleta as preferências de 'saveLogin' e 'stayLoggedIn' para determinar o comportamento:
+     * - Se 'saveLogin' for verdadeiro, coleta o email e senha armazenados e os salva novamente, com a opção 'stayLoggedIn' desmarcada.
+     * - Caso contrário, apaga as preferências (dados de login e opções).
+     *
+     * Como não sabia se essa funcionalidade era necessária e também não sabia se havia implementado corretamente,
+     * decidi deixá-la como função secundária, apenas por curiosidade.
+     */
+
     /*fun logout() {
         viewModelScope.launch {
             val (saveLogin, stayLoggedIn) = repository.loginPreferences.first()
@@ -35,5 +50,4 @@ class LoggedViewModel(application: Application) : AndroidViewModel(application) 
             _loggedOut.value = true
         }
     }*/
-
 }

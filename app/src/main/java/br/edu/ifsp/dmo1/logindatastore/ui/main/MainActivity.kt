@@ -13,7 +13,7 @@ import br.edu.ifsp.dmo1.logindatastore.ui.logged.LoggedActivity
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
-    private var flag = false
+    private var flag = false // Flag usada para garantir que a navegação para a 'LoggedActivity' ocorra apenas uma vez.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +82,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToLoggedActivity() {
+
+        /*
+         * Acredito que a flag está sendo usada para garantir que a navegação para a 'LoggedActivity' aconteça apenas uma vez.
+         * Isso evita múltiplas tentativas de navegação enquanto a atividade já foi iniciada.
+         * Por exemplo, se o usuário clicar em 'Entrar' e houver uma demora na execução da Activity, pode ser que o usuário clique novamente,
+         * por acreditar que ação não foi iniciada, nesse caso, sem uma flag, outra Activity seria iniciada, o que não é desejado.
+         */
+
         if (!flag) {
             flag = true
             val mIntent = Intent(this, LoggedActivity::class.java)
