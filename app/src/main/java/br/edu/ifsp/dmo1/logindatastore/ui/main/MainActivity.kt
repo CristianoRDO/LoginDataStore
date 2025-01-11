@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import br.edu.ifsp.dmo1.logindatastore.R
 import br.edu.ifsp.dmo1.logindatastore.databinding.ActivityMainBinding
 import br.edu.ifsp.dmo1.logindatastore.ui.logged.LoggedActivity
 
@@ -29,17 +30,17 @@ class MainActivity : AppCompatActivity() {
             if (it) {
                 navigateToLoggedActivity()
             } else {
-                Toast.makeText(this, "Erro ao fazer login.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.login_error), Toast.LENGTH_SHORT).show()
             }
         })
 
         viewModel.loginPreferences.observe(this, Observer {
-            val (saveLogin, stayLoggeIn) = it
-            if (stayLoggeIn) {
+            val (saveLogin, stayLoggedIn) = it
+            if (stayLoggedIn) {
                 navigateToLoggedActivity()
             }
             binding.checkboxSaveLogin.isChecked = saveLogin
-            binding.checkboxStayLoggedin.isChecked = stayLoggeIn
+            binding.checkboxStayLoggedin.isChecked = stayLoggedIn
         })
 
         viewModel.dataPreferences.observe(this, Observer {
@@ -58,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleLogin() {
         val email = binding.textEmail.text.toString()
-        val passwd = binding.textPassword.text.toString().toLong()
+        val passwd = binding.textPassword.text.toString()
         val saveLogin = binding.checkboxSaveLogin.isChecked
         val stayLoggedIn = binding.checkboxStayLoggedin.isChecked
 
@@ -67,10 +68,16 @@ class MainActivity : AppCompatActivity() {
         binding.checkboxSaveLogin.isChecked = false
         binding.checkboxStayLoggedin.isChecked = false
 
-        if (email.isNotEmpty()) {
-            viewModel.login(email, passwd, saveLogin, stayLoggedIn)
+        if (email.isNotEmpty() && passwd.isNotBlank()) {
+            val passwdConvert = passwd.toLongOrNull()
+
+            if (passwdConvert != null) {
+                viewModel.login(email, passwdConvert, saveLogin, stayLoggedIn)
+            } else {
+                Toast.makeText(this, getString(R.string.invalid_password_format), Toast.LENGTH_SHORT).show()
+            }
         } else {
-            Toast.makeText(this, "Preencha todos os dados.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show()
         }
     }
 

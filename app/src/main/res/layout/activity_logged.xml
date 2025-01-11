@@ -9,6 +9,7 @@
 
     <TextView
         android:id="@+id/text_message"
+        android:text="@string/welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +20,7 @@
         android:layout_marginTop="64dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_login"
+        android:id="@+id/button_logout"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -6,4 +6,9 @@
     <string name="password">Senha</string>
     <string name="e_mail">E-mail</string>
     <string name="keep_logged_in">Manter logado</string>
+    <string name="welcome">Bem-Vindo</string>
+    <string name="login_error">Erro ao fazer login.</string>
+    <string name="fill_all_fields">Preencha todos os dados.</string>
+    <string name="invalid_password_format">Formato de Senha Invalido.</string>
+    <string name="success_logout">Logout Realizado com Sucesso</string>
 </resources>
