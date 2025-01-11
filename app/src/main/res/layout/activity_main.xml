@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="E-mail"
+        android:hint="@string/e_mail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidelineH30">
 
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Senha"
+        android:hint="@string/password"
         app:layout_constraintEnd_toEndOf="@id/textlayout_email"
         app:layout_constraintStart_toStartOf="@id/textlayout_email"
         app:layout_constraintTop_toBottomOf="@id/textlayout_email">
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Salvar dados de login"
+        android:text="@string/save_login_data"
         app:layout_constraintEnd_toStartOf="@id/checkbox_stay_loggedin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textlayout_password" />
@@ -61,7 +61,7 @@
         android:id="@+id/checkbox_stay_loggedin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Manter logado"
+        android:text="@string/keep_logged_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/checkbox_save_login"
         app:layout_constraintTop_toTopOf="@+id/checkbox_save_login" />
@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Entrar"
+        android:text="@string/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/checkbox_stay_loggedin" />

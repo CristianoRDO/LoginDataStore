@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">LoginDataStore</string>
+    <string name="logout">Logout</string>
+    <string name="save_login_data">Salvar dados de login</string>
+    <string name="login">Entrar</string>
+    <string name="password">Senha</string>
+    <string name="e_mail">E-mail</string>
+    <string name="keep_logged_in">Manter logado</string>
 </resources>
