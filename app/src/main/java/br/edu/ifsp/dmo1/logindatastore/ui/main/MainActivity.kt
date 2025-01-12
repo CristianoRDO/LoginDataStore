@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         binding.checkboxSaveLogin.isChecked = false
         binding.checkboxStayLoggedin.isChecked = false
 
-        if (email.isNotEmpty() && passwd.isNotBlank()) {
+        if (email.isNotBlank() && passwd.isNotBlank()) {
             val passwdConvert = passwd.toLongOrNull()
 
             if (passwdConvert != null) {
@@ -86,7 +86,8 @@ class MainActivity : AppCompatActivity() {
         /*
          * Acredito que a flag está sendo usada para garantir que a navegação para a 'LoggedActivity' aconteça apenas uma vez.
          * Isso evita múltiplas tentativas de navegação enquanto a atividade já foi iniciada.
-         * Por exemplo, se o usuário clicar em 'Entrar' e houver uma demora na execução da Activity, pode ser que o usuário clique novamente,
+         * Exemplo 1:
+         * Exemplo 2: Se o usuário clicar em 'Entrar' e houver uma demora na execução da Activity, pode ser que o usuário clique novamente,
          * por acreditar que ação não foi iniciada, nesse caso, sem uma flag, outra Activity seria iniciada, o que não é desejado.
          */
 
