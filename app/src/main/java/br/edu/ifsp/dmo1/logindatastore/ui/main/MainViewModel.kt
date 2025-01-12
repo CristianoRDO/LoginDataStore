@@ -33,6 +33,32 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    /*
+     * Esta função realiza o login do usuário, autenticando o email e a senha.
+     * Também salva as preferências do usuário com base nos parâmetros fornecidos.
+     *
+     * Percebi que talvez não fosse necessário verificar o parâmetro "stayLoggedIn".
+     * Caso o usuário não opte por salvar os dados de login ("saveLogin" seja falso)
+     * mas marque a opção de "stayLoggedIn", as credenciais permanecerão salvas
+     * mesmo após o logout, o que pode gerar inconsistências.
+     *
+     * Por isso, criei uma função alternativa que elimina esse comportamento.
+     * No entanto, como não tinha certeza se poderia realizar essa alteração,
+     * mantive a versão original (implementada no roteiro).
+     */
+
+    /*fun login(email: String, passwd: Long, saveLogin: Boolean, stayLoggedIn: Boolean) {
+        if (User.autenticate(email, passwd)) {
+            _loggedIn.value = true
+            if (saveLogin)
+                savePreferences(email, passwd, saveLogin, stayLoggedIn)
+            else
+                savePreferences("", 0L, saveLogin, stayLoggedIn)
+        } else {
+            _loggedIn.value = false
+        }
+    }*/
+
     private fun savePreferences(email: String, password: Long, saveLogin: Boolean, stayLoggedIn: Boolean) {
         viewModelScope.launch {
             repository.savePreferences(email, password, saveLogin, stayLoggedIn)
