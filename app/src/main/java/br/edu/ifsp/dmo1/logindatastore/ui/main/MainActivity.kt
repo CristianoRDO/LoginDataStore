@@ -84,9 +84,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToLoggedActivity() {
-
-        Log.d("MainActivity", "navigateToLoggedActivity() foi chamada") // Exibir no Log a Exibição das chamadas
-
+        
         /*
          * Acredito que a flag está sendo usada para garantir que a navegação para a 'LoggedActivity' aconteça apenas uma vez.
          * Isso evita múltiplas tentativas de navegação enquanto a atividade já foi iniciada.
@@ -108,6 +106,8 @@ class MainActivity : AppCompatActivity() {
          * Outra situação possível (difícil, mas possível): Se o usuário clicar em 'Entrar' e houver uma demora na execução da Activity, pode ser que o usuário clique novamente,
          * por acreditar que ação não foi iniciada, nesse caso, sem uma flag, outra Activity seria iniciada, o que não é desejado.
          */
+
+        Log.d("MainActivity", "navigateToLoggedActivity() foi chamada") // Exibir no Log a Exibição das chamadas
 
         if (!flag) {
             flag = true

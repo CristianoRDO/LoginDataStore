@@ -16,6 +16,24 @@ class LoggedViewModel(application: Application) : AndroidViewModel(application) 
     val loggedOut: LiveData<Boolean> = _loggedOut
 
     /*
+     * Função responsável por realizar o logout do usuário.
+     *
+     * Ao ser chamada, ela invoca a função 'logoutUser' no repositório, que é responsável por modificar apenas o valor de
+     * 'stayLoggedIn', definindo-o como 'false'. Isso evita a recuperação e o salvamento de dados desnecessários, como o
+     * email e a senha, otimizando o processo.
+     *
+     * Após a execução da função no repositório, a variável '_loggedOut' é atualizada para 'true', indicando que o usuário
+     * foi deslogado com sucesso.
+     */
+
+    fun logout() {
+        viewModelScope.launch {
+            repository.logoutUser()
+            _loggedOut.value = true
+        }
+    }
+
+    /*
     * Função de logout principal (comentada)
     *
     * Esta função realiza o logout recuperando os valores armazenados no Data Store
@@ -27,32 +45,12 @@ class LoggedViewModel(application: Application) : AndroidViewModel(application) 
     * - Armazena novamente o email, senha e a opção de salvar login, desativando 'manter logado'.
     */
 
-    fun logout() {
+    /*fun logout() {
         viewModelScope.launch {
             val (saveLogin) = repository.loginPreferences.first()
             val (email, password) = repository.dataPreferences.first()
             repository.savePreferences(email, password, saveLogin, false)
 
-            _loggedOut.value = true
-        }
-    }
-
-    /*
-     * Função de logout básica
-     *
-     * Esta função realiza o logout de forma simples, apagando todos os dados armazenados no Data Store,
-     * independentemente de qualquer opção ou preferência marcada pelo usuário.
-     *
-     * Comportamento:
-     * - Remove as informações de login (email e senha) e desativa todas as preferências,
-     *   incluindo 'saveLogin' e 'stayLoggedIn'.
-     * - Atualiza o estado para indicar que o logout foi concluído.
-     *
-     */
-
-    /*fun logout(){
-        viewModelScope.launch {
-            repository.savePreferences("", 0L, false, false)
             _loggedOut.value = true
         }
     }*/

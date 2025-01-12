@@ -36,6 +36,12 @@ class DataStoreRepository(context: Context) {
         }
     }
 
+    suspend fun logoutUser() {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKeys.STAY_LOGGED_IN] = false
+        }
+    }
+
     val loginPreferences: Flow<Pair<Boolean, Boolean>> = dataStore.data.map { preferences ->
         val saveLogin = preferences[PreferencesKeys.SAVE_LOGIN] ?: false
         val stayLoggedIn = preferences[PreferencesKeys.STAY_LOGGED_IN] ?: false
