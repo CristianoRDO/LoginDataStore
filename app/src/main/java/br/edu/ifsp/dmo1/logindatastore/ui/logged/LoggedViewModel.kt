@@ -16,7 +16,7 @@ class LoggedViewModel(application: Application) : AndroidViewModel(application) 
     val loggedOut: LiveData<Boolean> = _loggedOut
 
     /*
-     * Função responsável por realizar o logout do usuário.
+     * Função de logout principal (comentada).
      *
      * Ao ser chamada, ela invoca a função 'logoutUser' no repositório, que é responsável por modificar apenas o valor de
      * 'stayLoggedIn', definindo-o como 'false'. Isso evita a recuperação e o salvamento de dados desnecessários, como o
@@ -34,7 +34,7 @@ class LoggedViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     /*
-    * Função de logout principal (comentada)
+    * Função de logout alternativa (comentada)
     *
     * Esta função realiza o logout recuperando os valores armazenados no Data Store
     * (como email, senha e preferências de login) e os salva novamente, alterando
