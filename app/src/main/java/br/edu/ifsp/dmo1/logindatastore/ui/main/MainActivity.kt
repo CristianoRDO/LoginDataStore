@@ -2,6 +2,7 @@ package br.edu.ifsp.dmo1.logindatastore.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.loggedIn.observe(this, Observer {
             if (it) {
                 navigateToLoggedActivity()
+
             } else {
                 Toast.makeText(this, getString(R.string.login_error), Toast.LENGTH_SHORT).show()
             }
@@ -83,11 +85,27 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateToLoggedActivity() {
 
+        Log.d("MainActivity", "navigateToLoggedActivity() foi chamada") // Exibir no Log a Exibição das chamadas
+
         /*
          * Acredito que a flag está sendo usada para garantir que a navegação para a 'LoggedActivity' aconteça apenas uma vez.
          * Isso evita múltiplas tentativas de navegação enquanto a atividade já foi iniciada.
-         * Exemplo 1:
-         * Exemplo 2: Se o usuário clicar em 'Entrar' e houver uma demora na execução da Activity, pode ser que o usuário clique novamente,
+         *
+         * Principal motivo:
+         *
+         * Após um login ser realizado corretamente, os dois Observers configurados no método `setupObservers()` podem ser notificados:
+         * 1. O Observer de `viewModel.loggedIn` é acionado quando o valor de `loggedIn` muda para `true`, chamando a função `navigateToLoggedActivity()`.
+         * 2. O Observer de `viewModel.loginPreferences` é acionado quando as preferências de login são atualizadas e `stayLoggedIn` está definido como `true`,
+         * também chamando `navigateToLoggedActivity()`.
+         *
+         * Esse comportamento pode levar a múltiplas chamadas consecutivas de `navigateToLoggedActivity()`, resultando na tentativa de abrir
+         * a mesma Activity (`LoggedActivity`) mais de uma vez, o que pode gerar problemas, como sobreposição de telas ou comportamento inesperado.
+         *
+         * Para evitar esse problema, foi implementada a variável `flag`. Ela funciona como uma proteção, garantindo que a navegação para a
+         * `LoggedActivity` ocorra apenas uma vez. Quando a função é chamada pela primeira vez, a `flag` é definida como `true`, impedindo
+         * novas chamadas subsequentes enquanto a atividade atual ainda está em execução.
+         *
+         * Outra situação possível (difícil, mas possível): Se o usuário clicar em 'Entrar' e houver uma demora na execução da Activity, pode ser que o usuário clique novamente,
          * por acreditar que ação não foi iniciada, nesse caso, sem uma flag, outra Activity seria iniciada, o que não é desejado.
          */
 
